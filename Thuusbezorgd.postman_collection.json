@@ -1,0 +1,1090 @@
+{
+	"info": {
+		"_postman_id": "f126d49d-9ccc-4cd0-a72f-a5939c559ec3",
+		"name": "Thuusbezorgd",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Gateway",
+			"item": [
+				{
+					"name": "Stock Service",
+					"item": [
+						{
+							"name": "Dish",
+							"item": [
+								{
+									"name": "Create dish",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"Tomatensoep\",\n    \"ingredients\": [\"c25aeed4-3b72-443e-ae36-d6807784830b\"]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{gatewayHost}}/stock/dishes",
+											"host": [
+												"{{gatewayHost}}"
+											],
+											"path": [
+												"stock",
+												"dishes"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get dish by id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{gatewayHost}}/stock/dishes/7607ba0d-569b-4b6b-9f32-477b60ce33db",
+											"host": [
+												"{{gatewayHost}}"
+											],
+											"path": [
+												"stock",
+												"dishes",
+												"7607ba0d-569b-4b6b-9f32-477b60ce33db"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get dishes",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{gatewayHost}}/stock/dishes",
+											"host": [
+												"{{gatewayHost}}"
+											],
+											"path": [
+												"stock",
+												"dishes"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Check availability",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{gatewayHost}}/stock/dishes/check-availability?orderedDishes=f133f33f-2b32-480f-8e0a-c66fdd02f290&orderedDishes=f133f33f-2b32-480f-8e0a-c66fdd02f290",
+											"host": [
+												"{{gatewayHost}}"
+											],
+											"path": [
+												"stock",
+												"dishes",
+												"check-availability"
+											],
+											"query": [
+												{
+													"key": "orderedDishes",
+													"value": "f133f33f-2b32-480f-8e0a-c66fdd02f290"
+												},
+												{
+													"key": "orderedDishes",
+													"value": "f133f33f-2b32-480f-8e0a-c66fdd02f290"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Ingredient",
+							"item": [
+								{
+									"name": "Create ingredient",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"Tomaat\",\n    \"vegetarian\": true,\n    \"nrInStock\": 10000\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{gatewayHost}}/stock/ingredients",
+											"host": [
+												"{{gatewayHost}}"
+											],
+											"path": [
+												"stock",
+												"ingredients"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get ingredient by id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{gatewayHost}}/stock/ingredients/5b65225a-76a1-4a81-ba96-ac814104c791",
+											"host": [
+												"{{gatewayHost}}"
+											],
+											"path": [
+												"stock",
+												"ingredients",
+												"5b65225a-76a1-4a81-ba96-ac814104c791"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get ingredients",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{gatewayHost}}/stock/ingredients",
+											"host": [
+												"{{gatewayHost}}"
+											],
+											"path": [
+												"stock",
+												"ingredients"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Dish Review",
+							"item": [
+								{
+									"name": "Post dish review",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"rating\": 5,\n    \"description\": \"Was lekker!\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{gatewayHost}}/stock/dishes/04b06c10-6be7-419e-910d-4a3b37656da0/reviews",
+											"host": [
+												"{{gatewayHost}}"
+											],
+											"path": [
+												"stock",
+												"dishes",
+												"04b06c10-6be7-419e-910d-4a3b37656da0",
+												"reviews"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get dish reviews for dish",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{gatewayHost}}/stock/dishes/04b06c10-6be7-419e-910d-4a3b37656da0/reviews",
+											"host": [
+												"{{gatewayHost}}"
+											],
+											"path": [
+												"stock",
+												"dishes",
+												"04b06c10-6be7-419e-910d-4a3b37656da0",
+												"reviews"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Orders Service",
+					"item": [
+						{
+							"name": "Report",
+							"item": [
+								{
+									"name": "Get report (using query parameters)",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{gatewayHost}}/orders/report?interval=day",
+											"host": [
+												"{{gatewayHost}}"
+											],
+											"path": [
+												"orders",
+												"report"
+											],
+											"query": [
+												{
+													"key": "interval",
+													"value": "day"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Orders",
+							"item": [
+								{
+									"name": "Place order",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Authentication-Hack",
+												"value": "admin",
+												"type": "default"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"dishes\": [\"04b06c10-6be7-419e-910d-4a3b37656da0\"]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{gatewayHost}}/orders",
+											"host": [
+												"{{gatewayHost}}"
+											],
+											"path": [
+												"orders"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get orders",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "",
+												"value": "",
+												"type": "default"
+											}
+										],
+										"url": {
+											"raw": "{{gatewayHost}}/orders",
+											"host": [
+												"{{gatewayHost}}"
+											],
+											"path": [
+												"orders"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get order by id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{gatewayHost}}/orders/de0004f6-d5cc-4a4e-96c0-efd0b9faafe4",
+											"host": [
+												"{{gatewayHost}}"
+											],
+											"path": [
+												"orders",
+												"de0004f6-d5cc-4a4e-96c0-efd0b9faafe4"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Check delivered",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{gatewayHost}}/orders/dd78e7f1-5b10-4eb7-a0a4-7e86d853b561/check-delivered",
+											"host": [
+												"{{gatewayHost}}"
+											],
+											"path": [
+												"orders",
+												"dd78e7f1-5b10-4eb7-a0a4-7e86d853b561",
+												"check-delivered"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Delivery Service",
+					"item": [
+						{
+							"name": "Rider",
+							"item": [
+								{
+									"name": "Get riders",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{gatewayHost}}/rider",
+											"host": [
+												"{{gatewayHost}}"
+											],
+											"path": [
+												"rider"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get rider by id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{gatewayHost}}/rider/b76af621-73ad-482e-8bc6-83b45b31e1d5",
+											"host": [
+												"{{gatewayHost}}"
+											],
+											"path": [
+												"rider",
+												"b76af621-73ad-482e-8bc6-83b45b31e1d5"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create rider",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"Mustafa\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{gatewayHost}}/rider",
+											"host": [
+												"{{gatewayHost}}"
+											],
+											"path": [
+												"rider"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Delivery",
+							"item": [
+								{
+									"name": "Get deliveries by user",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{gatewayHost}}/delivery",
+											"host": [
+												"{{gatewayHost}}"
+											],
+											"path": [
+												"delivery"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get delivery by id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{gatewayHost}}/delivery/6d2b3421-dfe4-4110-831f-c3f7e7174f57",
+											"host": [
+												"{{gatewayHost}}"
+											],
+											"path": [
+												"delivery",
+												"6d2b3421-dfe4-4110-831f-c3f7e7174f57"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Delivery Review",
+							"item": [
+								{
+									"name": "Post delivery review",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"rating\": 1,\n    \"description\": \"Nee, was niet bepaald goed...\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{gatewayHost}}/delivery/6d2b3421-dfe4-4110-831f-c3f7e7174f57/reviews",
+											"host": [
+												"{{gatewayHost}}"
+											],
+											"path": [
+												"delivery",
+												"6d2b3421-dfe4-4110-831f-c3f7e7174f57",
+												"reviews"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get delivery reviews for delivery",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{gatewayHost}}/delivery/d9a6ccc0-95f5-448e-ba41-cb81f0252f95/reviews",
+											"host": [
+												"{{gatewayHost}}"
+											],
+											"path": [
+												"delivery",
+												"d9a6ccc0-95f5-448e-ba41-cb81f0252f95",
+												"reviews"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Regular",
+			"item": [
+				{
+					"name": "Stock Service",
+					"item": [
+						{
+							"name": "Dish",
+							"item": [
+								{
+									"name": "Create dish",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"Tomatensoep\",\n    \"ingredients\": [\"47503c72-42fb-473f-b44e-071cfff88f77\"]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{stockHost}}/stock/dishes",
+											"host": [
+												"{{stockHost}}"
+											],
+											"path": [
+												"stock",
+												"dishes"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get dish by id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{stockHost}}/stock/dishes/d1c1dcbd-e4ab-4835-b438-841a32e001b2",
+											"host": [
+												"{{stockHost}}"
+											],
+											"path": [
+												"stock",
+												"dishes",
+												"d1c1dcbd-e4ab-4835-b438-841a32e001b2"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get dishes",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{stockHost}}/stock/dishes",
+											"host": [
+												"{{stockHost}}"
+											],
+											"path": [
+												"stock",
+												"dishes"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Check availability",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{stockHost}}/stock/dishes/check-availability?orderedDishes=6d3548df-76a1-4045-8291-d0f3f0183c3d",
+											"host": [
+												"{{stockHost}}"
+											],
+											"path": [
+												"stock",
+												"dishes",
+												"check-availability"
+											],
+											"query": [
+												{
+													"key": "orderedDishes",
+													"value": "6d3548df-76a1-4045-8291-d0f3f0183c3d"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Ingredient",
+							"item": [
+								{
+									"name": "Create ingredient",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"Tomaat\",\n    \"vegetarian\": true,\n    \"nrInStock\": 10000\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{stockHost}}/stock/ingredients",
+											"host": [
+												"{{stockHost}}"
+											],
+											"path": [
+												"stock",
+												"ingredients"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get ingredient by id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{stockHost}}/stock/ingredients/89edc4ef-aab6-45cd-aeaf-8b02693c2ebd",
+											"host": [
+												"{{stockHost}}"
+											],
+											"path": [
+												"stock",
+												"ingredients",
+												"89edc4ef-aab6-45cd-aeaf-8b02693c2ebd"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get ingredients",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{stockHost}}/stock/ingredients",
+											"host": [
+												"{{stockHost}}"
+											],
+											"path": [
+												"stock",
+												"ingredients"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Dish Review",
+							"item": [
+								{
+									"name": "Post dish review",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"rating\": 5,\n    \"description\": \"Was lekker!\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{stockHost}}/stock/dishes/04b06c10-6be7-419e-910d-4a3b37656da0/reviews",
+											"host": [
+												"{{stockHost}}"
+											],
+											"path": [
+												"stock",
+												"dishes",
+												"04b06c10-6be7-419e-910d-4a3b37656da0",
+												"reviews"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get dish reviews for dish",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{stockHost}}/stock/dishes/04b06c10-6be7-419e-910d-4a3b37656da0/reviews",
+											"host": [
+												"{{stockHost}}"
+											],
+											"path": [
+												"stock",
+												"dishes",
+												"04b06c10-6be7-419e-910d-4a3b37656da0",
+												"reviews"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Orders Service",
+					"item": [
+						{
+							"name": "Report",
+							"item": [
+								{
+									"name": "Get report (using query parameters)",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{ordersHost}}/orders/report?interval=week",
+											"host": [
+												"{{ordersHost}}"
+											],
+											"path": [
+												"orders",
+												"report"
+											],
+											"query": [
+												{
+													"key": "interval",
+													"value": "week"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Orders",
+							"item": [
+								{
+									"name": "Place order",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Authentication-Hack",
+												"value": "admin",
+												"type": "default"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"dishes\": [\"d1c1dcbd-e4ab-4835-b438-841a32e001b2\"]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{ordersHost}}/orders",
+											"host": [
+												"{{ordersHost}}"
+											],
+											"path": [
+												"orders"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get orders",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "",
+												"value": "",
+												"type": "default"
+											}
+										],
+										"url": {
+											"raw": "{{ordersHost}}/orders",
+											"host": [
+												"{{ordersHost}}"
+											],
+											"path": [
+												"orders"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get order by id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{ordersHost}}/orders/98e0c523-9790-433e-b7f1-74138d0d4fbf",
+											"host": [
+												"{{ordersHost}}"
+											],
+											"path": [
+												"orders",
+												"98e0c523-9790-433e-b7f1-74138d0d4fbf"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Check delivered",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{ordersHost}}/orders/88b83586-01c3-4949-854f-47ec1f6983ea/check-delivered",
+											"host": [
+												"{{ordersHost}}"
+											],
+											"path": [
+												"orders",
+												"88b83586-01c3-4949-854f-47ec1f6983ea",
+												"check-delivered"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Delivery Service",
+					"item": [
+						{
+							"name": "Rider",
+							"item": [
+								{
+									"name": "Get riders",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{deliveryHost}}/rider",
+											"host": [
+												"{{deliveryHost}}"
+											],
+											"path": [
+												"rider"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get rider by id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{deliveryHost}}/rider/736ab5e0-5f1f-4555-8d5e-cfd05368d659",
+											"host": [
+												"{{deliveryHost}}"
+											],
+											"path": [
+												"rider",
+												"736ab5e0-5f1f-4555-8d5e-cfd05368d659"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create rider",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"Mustafa\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{deliveryHost}}/rider",
+											"host": [
+												"{{deliveryHost}}"
+											],
+											"path": [
+												"rider"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Delivery",
+							"item": [
+								{
+									"name": "Get deliveries by user",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{deliveryHost}}/delivery",
+											"host": [
+												"{{deliveryHost}}"
+											],
+											"path": [
+												"delivery"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get delivery by id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{deliveryHost}}/delivery/0c0150bc-061f-40dd-a493-910e8d1ddebc",
+											"host": [
+												"{{deliveryHost}}"
+											],
+											"path": [
+												"delivery",
+												"0c0150bc-061f-40dd-a493-910e8d1ddebc"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Delivery Review",
+							"item": [
+								{
+									"name": "Post delivery review",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"rating\": 1,\n    \"description\": \"Nee, was niet bepaald goed...\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{deliveryHost}}/delivery/0c0150bc-061f-40dd-a493-910e8d1ddebc/reviews",
+											"host": [
+												"{{deliveryHost}}"
+											],
+											"path": [
+												"delivery",
+												"0c0150bc-061f-40dd-a493-910e8d1ddebc",
+												"reviews"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get delivery reviews for delivery",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{deliveryHost}}/delivery/d9a6ccc0-95f5-448e-ba41-cb81f0252f95/reviews",
+											"host": [
+												"{{deliveryHost}}"
+											],
+											"path": [
+												"delivery",
+												"d9a6ccc0-95f5-448e-ba41-cb81f0252f95",
+												"reviews"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "admin",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "Authentication-Hack",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
