@@ -36,8 +36,9 @@ public class OrderCommandHandler {
     public OrderDto handle(PlaceOrder command) {
         Order order = Order.create(command.user(), LocalDateTime.now(), command.dishes().stream().map(DishInfo::new).toList());
 
-        if (!stockGateway.checkStock(order.getOrderedDishes()))
+        if (!stockGateway.checkStock(order.getOrderedDishes())) {
             throw new OutOfStockException("At least one of the dishes is out of stock");
+        }
 
         this.publishEventsAndSave(order);
 
@@ -45,7 +46,8 @@ public class OrderCommandHandler {
     }
 
     public void handle(OrderReadyForDelivery command) {
-        Order order = this.orderRepository.findById(command.id())
+        Order order = this.orderRepository
+                .findById(command.id())
                 .orElseThrow(() -> new OrderNotFoundException(String.format("Order with id '%s' could not be found", command.id())));
 
         order.readyForDelivery();
@@ -54,7 +56,8 @@ public class OrderCommandHandler {
     }
 
     public void handle(OrderUnderway command) {
-        Order order = this.orderRepository.findById(command.id())
+        Order order = this.orderRepository
+                .findById(command.id())
                 .orElseThrow(() -> new OrderNotFoundException(String.format("Order with id '%s' could not be found.", command.id())));
 
         order.underway(new DeliveryInfo(command.delivery()));
@@ -63,7 +66,8 @@ public class OrderCommandHandler {
     }
 
     public void handle(OrderDelivered command) {
-        Order order = this.orderRepository.findById(command.id())
+        Order order = this.orderRepository
+                .findById(command.id())
                 .orElseThrow(() -> new OrderNotFoundException(String.format("Order with id '%s' could not be found.", command.id())));
 
         order.delivered();

@@ -33,12 +33,12 @@ public class DishController {
         this.queryHandler = queryHandler;
     }
 
-    @PostMapping("")
+    @PostMapping
     public DishDto createDish(@RequestBody CreateDishRequest body) {
         return this.commandHandler.handle(new CreateDish(body.name, body.ingredients));
     }
 
-    @GetMapping("")
+    @GetMapping
     public List<DishDto> getDishes() {
         return this.queryHandler.handle(new GetDishes());
     }

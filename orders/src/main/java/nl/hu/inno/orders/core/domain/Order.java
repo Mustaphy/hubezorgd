@@ -79,7 +79,8 @@ public class Order {
     }
 
     public void addDishes(List<DishInfo> dishes) {
-        Map<DishInfo, Long> ordered = dishes.stream()
+        Map<DishInfo, Long> ordered = dishes
+                .stream()
                 .collect(Collectors.groupingBy(e -> e, Collectors.counting()));
 
         ordered.forEach((key, value) -> orderedDishes.add(OrderedDish.create(this, key, value.intValue())));

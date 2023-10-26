@@ -26,8 +26,6 @@ public class Delivery {
     @Transient
     private List<DeliveryEvent> events = new ArrayList<>();
 
-    private Delivery() { }
-
     private Delivery(LocalDateTime estimatedDelivery, Rider rider, OrderInfo order) {
         this.id = UUID.randomUUID();
         this.estimatedDelivery = estimatedDelivery;
@@ -61,7 +59,9 @@ public class Delivery {
     }
 
     public boolean isDelivered() {
-        return LocalDateTime.now().isAfter(this.estimatedDelivery);
+        return LocalDateTime
+                .now()
+                .isAfter(this.estimatedDelivery);
     }
 
     public void deliver() {

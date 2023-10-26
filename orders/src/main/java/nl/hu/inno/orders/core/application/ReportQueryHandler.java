@@ -21,7 +21,8 @@ public class ReportQueryHandler {
     }
 
     public List<ReportDto> handle(GetReport query) {
-        return this.orderRepository.findAll()
+        return this.orderRepository
+                .findAll()
                 .stream()
                 .collect(Collectors.groupingBy(order -> this.getIntervalGrouping(order, query.interval())))
                 .entrySet()

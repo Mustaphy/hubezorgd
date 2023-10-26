@@ -22,8 +22,6 @@ public class Ingredient {
     @Transient
     private List<IngredientEvent> events = new ArrayList<>();
 
-    protected Ingredient() { }
-
     private Ingredient(String name, boolean vegetarian, int nrInStock) {
         this.id = UUID.randomUUID();
         this.name = name;

@@ -20,8 +20,6 @@ public class Rider {
     @Transient
     private List<DeliveryEvent> events = new ArrayList<>();
 
-    public Rider() { }
-
     private Rider(String name) {
         this.id = UUID.randomUUID();
         this.name = name;
@@ -48,7 +46,9 @@ public class Rider {
     }
 
     public void addDelivery(Delivery delivery) {
-        if (!this.deliveries.contains(delivery)) this.deliveries.add(delivery);
+        if (!this.deliveries.contains(delivery)) {
+            this.deliveries.add(delivery);
+        }
     }
 
     public List<DeliveryEvent> listEvents() {

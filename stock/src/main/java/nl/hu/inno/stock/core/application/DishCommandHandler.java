@@ -40,7 +40,8 @@ public class DishCommandHandler {
     }
 
     public DishDto handle(CreateDish command) {
-        List<Ingredient> ingredients = command.ingredientsIds()
+        List<Ingredient> ingredients = command
+                .ingredientsIds()
                 .stream()
                 .map(ingredientId -> this.ingredientRepository
                         .findById(ingredientId)
@@ -55,16 +56,18 @@ public class DishCommandHandler {
     }
 
     public void handle(PrepareDishes command) {
-        if (!dishQueryHandler.handle(new CheckDishAvailability(command.orderedDishes())))
+        if (!dishQueryHandler.handle(new CheckDishAvailability(command.orderedDishes()))) {
             throw new OutOfStockException("At least one of the dishes is out of stock.");
+        }
 
         command.orderedDishes().forEach(orderedDish -> {
             Dish dish = this.dishRepository
                     .findById(orderedDish.id())
                     .orElseThrow(() -> new DishNotFoundException(String.format("Dish with id '%s' could not be found.", orderedDish.id())));
+
             dish.prepare(orderedDish.nr());
 
-            ingredientRepository.saveAll(dish.getIngredients());
+            this.ingredientRepository.saveAll(dish.getIngredients());
 
             this.publishEventsAndSave(dish);
         });
@@ -73,7 +76,8 @@ public class DishCommandHandler {
     }
 
     public DishReviewDto handle(PostDishReview command) {
-        Dish dish = this.dishRepository.findById(command.id())
+        Dish dish = this.dishRepository
+                .findById(command.id())
                 .orElseThrow(() -> new DishNotFoundException(String.format("Dish with id '%s' could not be found.", command.id())));
 
         return DishReviewDto.toDto(this.dishReviewRepository.save(new DishReview(dish, ReviewRating.fromInt(command.rating()), command.description(), command.user())));
@@ -88,7 +92,7 @@ public class DishCommandHandler {
     }
 
     private void publishEvent(DishEvent event) {
-        eventPublisher.publish(event);
+        this.eventPublisher.publish(event);
     }
 }
 

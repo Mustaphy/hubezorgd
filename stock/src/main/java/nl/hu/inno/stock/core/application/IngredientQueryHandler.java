@@ -18,14 +18,16 @@ public class IngredientQueryHandler {
     }
 
     public List<IngredientDto> handle(GetIngredients query) {
-        return this.repository.findAll()
+        return this.repository
+                .findAll()
                 .stream()
                 .map(IngredientDto::toDto)
                 .toList();
     }
 
     public IngredientDto handle(GetIngredientById query) {
-        return IngredientDto.toDto(this.repository
+        return IngredientDto
+                .toDto(this.repository
                 .findById(query.id())
                 .orElseThrow(() -> new IngredientNotFoundException(String.format("Ingredient with id '%s' could not be found.", query.id()))));
     }

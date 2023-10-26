@@ -20,8 +20,6 @@ public class Dish {
     @Transient
     private List<DishEvent> events = new ArrayList<>();
 
-    public Dish() { }
-
     private Dish(String name, List<Ingredient> ingredients) {
         this.id = UUID.randomUUID();
         this.name = name;
@@ -39,7 +37,7 @@ public class Dish {
     }
 
     public static void validate(Dish dish) {
-        if (dish.ingredients.size() == 0) {
+        if (dish.ingredients.isEmpty()) {
             throw new NoIngredientsException("Cannot have 0 ingredients.");
         }
     }

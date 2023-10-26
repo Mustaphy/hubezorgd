@@ -6,14 +6,4 @@ public enum OrderStatus {
     UNDERWAY,
     DELIVERED,
     DISPUTED;
-
-    public OrderStatus next() {
-        return switch (this) {
-            case RECEIVED -> READY_FOR_DELIVERY;
-            case READY_FOR_DELIVERY -> UNDERWAY;
-            case UNDERWAY -> DELIVERED;
-            case DELIVERED -> DELIVERED;
-            case DISPUTED -> DISPUTED;
-        };
-    }
 }

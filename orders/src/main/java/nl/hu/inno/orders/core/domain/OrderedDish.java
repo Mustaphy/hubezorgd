@@ -18,8 +18,6 @@ public class OrderedDish {
     private OrderedDishId id;
     private int nr;
 
-    private OrderedDish() { }
-
     private OrderedDish(Order order, DishInfo dish, int nr) {
         this.id = new OrderedDishId();
         this.id.dish = dish;

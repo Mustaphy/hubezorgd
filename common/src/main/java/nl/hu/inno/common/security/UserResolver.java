@@ -25,10 +25,11 @@ public class UserResolver implements HandlerMethodArgumentResolver {
     @Override
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
         String username = webRequest.getHeader("Authentication-Hack");
-        Exception unauthorized = new ResponseStatusException(HttpStatus.UNAUTHORIZED, "No user found, use Authentication-Hack header");
+
         if (username == null) {
-            throw unauthorized;
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "No user found, use Authentication-Hack header");
         }
+
         Optional<User> result = users.findById(username);
 
         if (result.isEmpty()) {

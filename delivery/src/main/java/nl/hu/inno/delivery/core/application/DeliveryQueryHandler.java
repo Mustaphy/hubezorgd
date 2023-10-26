@@ -25,22 +25,26 @@ public class DeliveryQueryHandler {
     }
 
     public List<DeliveryDto> handle(GetDeliveriesByUser query) {
-        return this.deliveryRepository.findDeliveriesByOrder_Username(query.user().getUsername())
+        return this.deliveryRepository
+                .findDeliveriesByOrder_Username(query.user().getUsername())
                 .stream()
                 .map(DeliveryDto::toDto)
                 .toList();
     }
 
     public DeliveryDto handle(GetDeliveryById query) {
-        return DeliveryDto.toDto(this.deliveryRepository.findById(query.id())
+        return DeliveryDto.toDto(this.deliveryRepository
+                .findById(query.id())
                 .orElseThrow(() -> new DeliveryNotFoundException(String.format("Delivery with id '%s' could not be found.", query.id()))));
     }
 
     public List<DeliveryReviewDto> handle(GetDeliveryReviewsForDelivery query) {
-        Delivery delivery = this.deliveryRepository.findById(query.id())
+        Delivery delivery = this.deliveryRepository
+                .findById(query.id())
                 .orElseThrow(() -> new DeliveryNotFoundException(String.format("Delivery with id '%s' could not be found.", query.id())));
 
-        return this.deliveryReviewRepository.findByDelivery(delivery)
+        return this.deliveryReviewRepository
+                .findByDelivery(delivery)
                 .stream()
                 .map(DeliveryReviewDto::toDto)
                 .toList();
