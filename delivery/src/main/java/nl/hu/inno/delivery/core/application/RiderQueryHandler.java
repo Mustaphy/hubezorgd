@@ -26,7 +26,8 @@ public class RiderQueryHandler {
     }
 
     public RiderDto handle(GetRiderById query) {
-        return RiderDto.toDto(this.riderRepository
+        return RiderDto
+                .toDto(this.riderRepository
                 .findById(query.id())
                 .orElseThrow(() -> new RiderNotFoundException(String.format("Rider with id '%s' could not be found.", query.id()))));
     }

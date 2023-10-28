@@ -3,7 +3,6 @@ package nl.hu.inno.delivery.core.application;
 import nl.hu.inno.delivery.core.application.command.CreateRider;
 import nl.hu.inno.delivery.core.data.storage.RiderRepository;
 import nl.hu.inno.delivery.core.domain.Rider;
-import nl.hu.inno.delivery.infrastructure.dto.DeliveryDto;
 import nl.hu.inno.delivery.infrastructure.dto.RiderDto;
 import org.springframework.stereotype.Service;
 @Service

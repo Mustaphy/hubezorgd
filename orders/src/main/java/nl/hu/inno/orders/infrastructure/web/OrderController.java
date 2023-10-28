@@ -9,11 +9,9 @@ import nl.hu.inno.orders.core.application.query.IsDelivered;
 import nl.hu.inno.orders.infrastructure.dto.OrderDto;
 import nl.hu.inno.orders.infrastructure.web.request.PlaceOrderRequest;
 import nl.hu.inno.common.security.User;
-import nl.hu.inno.orders.core.domain.Order;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URISyntaxException;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,12 +28,12 @@ public class OrderController {
 
     @GetMapping
     public List<OrderDto> getOrders(User user) {
-        return this.queryHandler.handle(new GetOrders());
+        return this.queryHandler.handle(new GetOrders(user));
     }
 
     @GetMapping("/{id}")
     public OrderDto getOrderById(User user, @PathVariable UUID id) {
-        return this.queryHandler.handle(new GetOrderById(id));
+        return this.queryHandler.handle(new GetOrderById(user, id));
     }
 
     @GetMapping("/{id}/is-delivered")

@@ -22,7 +22,7 @@ public class OrderQueryHandler {
 
     public List<OrderDto> handle(GetOrders query) {
         return this.orderRepository
-                .findAll()
+                .findAllByUser(query.user())
                 .stream()
                 .map(DeliveryBasedOrderDtoFactory::create)
                 .toList();
@@ -30,7 +30,7 @@ public class OrderQueryHandler {
 
     public OrderDto handle(GetOrderById query) {
         return DeliveryBasedOrderDtoFactory.create(this.orderRepository
-                .findById(query.id())
+                .findByIdAndUser(query.id(), query.user())
                 .orElseThrow(() -> new OrderNotFoundException(String.format("Order with id '%s' could not be found.", query.id()))));
     }
 

@@ -1,4 +1,6 @@
 package nl.hu.inno.orders.core.application.query;
 
-public record GetOrders() {
+import nl.hu.inno.common.security.User;
+
+public record GetOrders(User user) {
 }

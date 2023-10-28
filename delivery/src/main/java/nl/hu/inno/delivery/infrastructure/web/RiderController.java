@@ -23,7 +23,7 @@ public class RiderController {
         this.riderQueryHandler = riderQueryHandler;
     }
 
-    @GetMapping("")
+    @GetMapping
     public List<RiderDto> handle() {
         return this.riderQueryHandler.handle(new GetRiders());
     }
@@ -33,7 +33,7 @@ public class RiderController {
         return this.riderQueryHandler.handle(new GetRiderById(id));
     }
 
-    @PostMapping("")
+    @PostMapping
     public RiderDto handle(@RequestBody CreateRiderRequest body) {
         return this.riderCommandHandler.handle(new CreateRider(body.name));
     }
