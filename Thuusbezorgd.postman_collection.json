@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "f126d49d-9ccc-4cd0-a72f-a5939c559ec3",
+		"_postman_id": "15b4a75d-53a0-47d5-86bf-b51e374d57c5",
 		"name": "Thuusbezorgd",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30739670"
 	},
 	"item": [
 		{
@@ -21,7 +22,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"name\": \"Tomatensoep\",\n    \"ingredients\": [\"c25aeed4-3b72-443e-ae36-d6807784830b\"]\n}",
+											"raw": "{\n    \"name\": \"Tomatensoep\",\n    \"ingredients\": [\"9841ec8b-1093-4643-9dc5-7bbaa3742f77\"]\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -282,7 +283,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"dishes\": [\"04b06c10-6be7-419e-910d-4a3b37656da0\"]\n}",
+											"raw": "{\n    \"dishes\": [\"bd52f0bc-9dd4-40df-b7d6-626486ad4185\"]\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -330,32 +331,32 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "{{gatewayHost}}/orders/de0004f6-d5cc-4a4e-96c0-efd0b9faafe4",
+											"raw": "{{gatewayHost}}/orders/67e01e33-45ca-4bb4-ab92-73803627a045",
 											"host": [
 												"{{gatewayHost}}"
 											],
 											"path": [
 												"orders",
-												"de0004f6-d5cc-4a4e-96c0-efd0b9faafe4"
+												"67e01e33-45ca-4bb4-ab92-73803627a045"
 											]
 										}
 									},
 									"response": []
 								},
 								{
-									"name": "Check delivered",
+									"name": "Is delivered",
 									"request": {
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "{{gatewayHost}}/orders/dd78e7f1-5b10-4eb7-a0a4-7e86d853b561/check-delivered",
+											"raw": "{{gatewayHost}}/orders/ac893b74-2ed9-44bd-b11a-01f819d0a20c/is-delivered",
 											"host": [
 												"{{gatewayHost}}"
 											],
 											"path": [
 												"orders",
-												"dd78e7f1-5b10-4eb7-a0a4-7e86d853b561",
-												"check-delivered"
+												"ac893b74-2ed9-44bd-b11a-01f819d0a20c",
+												"is-delivered"
 											]
 										}
 									},
@@ -438,7 +439,7 @@
 							"name": "Delivery",
 							"item": [
 								{
-									"name": "Get deliveries by user",
+									"name": "Get deliveries",
 									"request": {
 										"method": "GET",
 										"header": [],
@@ -460,13 +461,13 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "{{gatewayHost}}/delivery/6d2b3421-dfe4-4110-831f-c3f7e7174f57",
+											"raw": "{{gatewayHost}}/delivery/6372e047-f482-4ff1-bcbb-6c80ded40643",
 											"host": [
 												"{{gatewayHost}}"
 											],
 											"path": [
 												"delivery",
-												"6d2b3421-dfe4-4110-831f-c3f7e7174f57"
+												"6372e047-f482-4ff1-bcbb-6c80ded40643"
 											]
 										}
 									},
@@ -1057,7 +1058,7 @@
 		"apikey": [
 			{
 				"key": "value",
-				"value": "admin",
+				"value": "mustafa",
 				"type": "string"
 			},
 			{
@@ -1085,6 +1086,12 @@
 					""
 				]
 			}
+		}
+	],
+	"variable": [
+		{
+			"key": "gatewayHost",
+			"value": "http://localhost:1453"
 		}
 	]
 }
