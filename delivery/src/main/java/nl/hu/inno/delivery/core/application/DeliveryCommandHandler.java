@@ -21,6 +21,7 @@ import nl.hu.inno.delivery.infrastructure.gateway.HttpOrdersGateway;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;
@@ -63,9 +64,11 @@ public class DeliveryCommandHandler {
         // Schedule a task for 2 seconds after estimated delivery to complete delivery
         this.taskScheduler.schedule(
                 new CompleteDelivery(this, delivery.getId()),
-                Date.from(delivery.getEstimatedDelivery().plusSeconds(2).atZone(ZoneId.systemDefault()).toInstant())
-        );
-    }
+                Instant.from(delivery
+                        .getEstimatedDelivery()
+                        .plusSeconds(3)
+                        .atZone(ZoneId.systemDefault()).toInstant())
+        );}
 
     public void handle(CompleteDelivery task) {
         Delivery delivery = this.deliveryRepository

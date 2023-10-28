@@ -28,7 +28,7 @@ public class OrderController {
         this.queryHandler = queryHandler;
     }
 
-    @GetMapping("")
+    @GetMapping
     public List<OrderDto> getOrders(User user) {
         return this.queryHandler.handle(new GetOrders());
     }
@@ -38,13 +38,13 @@ public class OrderController {
         return this.queryHandler.handle(new GetOrderById(id));
     }
 
-    @GetMapping("/{id}/check-delivered")
+    @GetMapping("/{id}/is-delivered")
     public boolean isDelivered(@PathVariable("id") UUID id) {
         return this.queryHandler.handle(new IsDelivered(id));
     }
 
     @Transactional
-    @PostMapping("")
+    @PostMapping
     public OrderDto placeOrder(User user, @RequestBody PlaceOrderRequest body) {
         return this.commandHandler.handle(new PlaceOrder(user, body.dishes));
     }

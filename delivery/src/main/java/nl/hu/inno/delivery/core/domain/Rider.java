@@ -20,6 +20,8 @@ public class Rider {
     @Transient
     private List<DeliveryEvent> events = new ArrayList<>();
 
+    public Rider() { }
+
     private Rider(String name) {
         this.id = UUID.randomUUID();
         this.name = name;

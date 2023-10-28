@@ -17,7 +17,8 @@ public class GatewayConfig {
 
     @Bean
     public RouteLocator gatewayRouting(RouteLocatorBuilder routeLocatorBuilder) {
-        return routeLocatorBuilder.routes()
+        return routeLocatorBuilder
+                .routes()
                 .route(route -> route.path("/orders/**").uri(this.ordersPath))
                 .route(route -> route.path("/stock/dishes/**", "/stock/ingredients/**").uri(this.stockPath))
                 .route(route -> route.path("/delivery/**", "/rider/**").uri(this.deliveryPath))

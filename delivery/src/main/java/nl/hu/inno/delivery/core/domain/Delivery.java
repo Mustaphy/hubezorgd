@@ -26,6 +26,8 @@ public class Delivery {
     @Transient
     private List<DeliveryEvent> events = new ArrayList<>();
 
+    private Delivery() { }
+
     private Delivery(LocalDateTime estimatedDelivery, Rider rider, OrderInfo order) {
         this.id = UUID.randomUUID();
         this.estimatedDelivery = estimatedDelivery;

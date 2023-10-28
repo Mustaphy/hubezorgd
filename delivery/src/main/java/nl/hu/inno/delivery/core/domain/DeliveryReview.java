@@ -17,6 +17,8 @@ public class DeliveryReview {
     private String description;
     private User user;
 
+    private DeliveryReview() { }
+
     public DeliveryReview(Delivery delivery, ReviewRating rating, String description, User user) {
         this.id = UUID.randomUUID();
         this.delivery = delivery;
