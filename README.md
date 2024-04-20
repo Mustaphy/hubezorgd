@@ -1,4 +1,4 @@
-![hubezorgd-logo]()
+![hubezorgd-logo](https://raw.githubusercontent.com/Mustaphy/Hubezorgd/master/assets/hubezorgd-logo.svg)
 
 # Hubezorgd
 Hubezorgd is a modular, event-driven food takeaway application built with technologies such as Java Spring Boot and
