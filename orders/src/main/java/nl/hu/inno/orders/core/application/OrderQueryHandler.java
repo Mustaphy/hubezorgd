@@ -6,8 +6,8 @@ import nl.hu.inno.orders.core.application.query.IsDelivered;
 import nl.hu.inno.orders.core.data.storage.OrderRepository;
 import nl.hu.inno.orders.core.domain.OrderStatus;
 import nl.hu.inno.orders.core.domain.exception.OrderNotFoundException;
-import nl.hu.inno.orders.infrastructure.dto.OrderDto;
-import nl.hu.inno.orders.infrastructure.dto.factory.DeliveryBasedOrderDtoFactory;
+import nl.hu.inno.orders.infrastructure.dto.OrderDTO;
+import nl.hu.inno.orders.infrastructure.dto.factory.DeliveryBasedOrderDTOFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,16 +20,16 @@ public class OrderQueryHandler {
         this.orderRepository = orderRepository;
     }
 
-    public List<OrderDto> handle(GetOrders query) {
+    public List<OrderDTO> handle(GetOrders query) {
         return this.orderRepository
                 .findAllByUser(query.user())
                 .stream()
-                .map(DeliveryBasedOrderDtoFactory::create)
+                .map(DeliveryBasedOrderDTOFactory::create)
                 .toList();
     }
 
-    public OrderDto handle(GetOrderById query) {
-        return DeliveryBasedOrderDtoFactory.create(this.orderRepository
+    public OrderDTO handle(GetOrderById query) {
+        return DeliveryBasedOrderDTOFactory.create(this.orderRepository
                 .findByIdAndUser(query.id(), query.user())
                 .orElseThrow(() -> new OrderNotFoundException(String.format("Order with deliveryId '%s' could not be found.", query.id()))));
     }

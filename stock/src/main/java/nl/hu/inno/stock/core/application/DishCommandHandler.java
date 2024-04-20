@@ -18,8 +18,8 @@ import nl.hu.inno.stock.core.domain.event.DishesPreparedEvent;
 import nl.hu.inno.stock.core.domain.exception.DishNotFoundException;
 import nl.hu.inno.stock.core.domain.exception.IngredientNotFoundException;
 import nl.hu.inno.stock.core.domain.exception.OutOfStockException;
-import nl.hu.inno.stock.infrastructure.dto.DishDto;
-import nl.hu.inno.stock.infrastructure.dto.DishReviewDto;
+import nl.hu.inno.stock.infrastructure.dto.DishDTO;
+import nl.hu.inno.stock.infrastructure.dto.DishReviewDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -41,7 +41,7 @@ public class DishCommandHandler {
         this.eventPublisher = eventPublisher;
     }
 
-    public DishDto handle(CreateDish command) {
+    public DishDTO handle(CreateDish command) {
         List<Ingredient> ingredients = command
                 .ingredientsIds()
                 .stream()
@@ -54,7 +54,7 @@ public class DishCommandHandler {
 
         this.publishEventsAndSave(dish);
 
-        return DishDto.toDto(dish);
+        return DishDTO.toDTO(dish);
     }
 
     public void handle(PrepareDishes command) {
@@ -77,12 +77,12 @@ public class DishCommandHandler {
         this.eventPublisher.publish(new DishesPreparedEvent(command.order()));
     }
 
-    public DishReviewDto handle(PostDishReview command) {
+    public DishReviewDTO handle(PostDishReview command) {
         Dish dish = this.dishRepository
                 .findById(command.id())
                 .orElseThrow(() -> new DishNotFoundException(String.format("Dish with id '%s' could not be found.", command.id())));
 
-        return DishReviewDto.toDto(this.dishReviewRepository.save(new DishReview(dish, ReviewRating.fromInt(command.rating()), command.description(), command.user())));
+        return DishReviewDTO.toDTO(this.dishReviewRepository.save(new DishReview(dish, ReviewRating.fromInt(command.rating()), command.description(), command.user())));
     }
 
     private void publishEventsAndSave(Dish dish) {

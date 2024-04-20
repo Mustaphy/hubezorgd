@@ -12,13 +12,12 @@ import nl.hu.inno.orders.core.domain.exception.OutOfStockException;
 import nl.hu.inno.orders.core.domain.info.DeliveryInfo;
 import nl.hu.inno.orders.core.domain.info.DishInfo;
 import nl.hu.inno.orders.core.domain.event.OrderEvent;
-import nl.hu.inno.orders.infrastructure.dto.OrderDto;
-import nl.hu.inno.orders.infrastructure.dto.factory.DeliveryBasedOrderDtoFactory;
+import nl.hu.inno.orders.infrastructure.dto.OrderDTO;
+import nl.hu.inno.orders.infrastructure.dto.factory.DeliveryBasedOrderDTOFactory;
 import nl.hu.inno.orders.infrastructure.gateway.HttpStockGateway;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -33,16 +32,18 @@ public class OrderCommandHandler {
         this.eventPublisher = eventPublisher;
     }
 
-    public OrderDto handle(PlaceOrder command) {
+    public OrderDTO handle(PlaceOrder command) {
         Order order = Order.create(command.user(), LocalDateTime.now(), command.dishes().stream().map(DishInfo::new).toList());
 
         if (!stockGateway.checkStock(order.getOrderedDishes())) {
             throw new OutOfStockException("At least one of the dishes is out of stock");
         }
 
+        order.clearEvents();
+
         this.publishEventsAndSave(order);
 
-        return DeliveryBasedOrderDtoFactory.create(order);
+        return DeliveryBasedOrderDTOFactory.create(order);
     }
 
     public void handle(OrderReadyForDelivery command) {

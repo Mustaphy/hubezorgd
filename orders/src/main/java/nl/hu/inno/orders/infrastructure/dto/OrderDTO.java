@@ -1,19 +1,18 @@
 package nl.hu.inno.orders.infrastructure.dto;
 
 import nl.hu.inno.orders.core.domain.OrderStatus;
-import nl.hu.inno.orders.core.domain.OrderedDish;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-public abstract class OrderDto {
-    private UUID id;
-    private OrderStatus status;
-    private LocalDateTime orderDate;
-    private List<OrderedDishDto> orderedDishes;
+public abstract class OrderDTO {
+    private final UUID id;
+    private final OrderStatus status;
+    private final LocalDateTime orderDate;
+    private final List<OrderedDishDTO> orderedDishes;
 
-    public OrderDto(UUID id, OrderStatus status, LocalDateTime orderDate, List<OrderedDishDto> orderedDishes) {
+    public OrderDTO(UUID id, OrderStatus status, LocalDateTime orderDate, List<OrderedDishDTO> orderedDishes) {
         this.id = id;
         this.status = status;
         this.orderDate = orderDate;
@@ -32,7 +31,7 @@ public abstract class OrderDto {
         return orderDate;
     }
 
-    public List<OrderedDishDto> getOrderedDishes() {
+    public List<OrderedDishDTO> getOrderedDishes() {
         return orderedDishes;
     }
 }

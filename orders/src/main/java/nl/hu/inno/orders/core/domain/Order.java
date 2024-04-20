@@ -24,7 +24,7 @@ public class Order {
     private LocalDateTime orderDate;
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
-    @OneToMany
+    @OneToMany(mappedBy = "id.order")
     @Cascade(CascadeType.PERSIST)
     private List<OrderedDish> orderedDishes = new ArrayList<>();
     @Embedded

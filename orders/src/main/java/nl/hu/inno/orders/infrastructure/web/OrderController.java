@@ -6,7 +6,7 @@ import nl.hu.inno.orders.core.application.command.PlaceOrder;
 import nl.hu.inno.orders.core.application.query.GetOrderById;
 import nl.hu.inno.orders.core.application.query.GetOrders;
 import nl.hu.inno.orders.core.application.query.IsDelivered;
-import nl.hu.inno.orders.infrastructure.dto.OrderDto;
+import nl.hu.inno.orders.infrastructure.dto.OrderDTO;
 import nl.hu.inno.orders.infrastructure.web.request.PlaceOrderRequest;
 import nl.hu.inno.common.security.User;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,12 +27,12 @@ public class OrderController {
     }
 
     @GetMapping
-    public List<OrderDto> getOrders(User user) {
+    public List<OrderDTO> getOrders(User user) {
         return this.queryHandler.handle(new GetOrders(user));
     }
 
     @GetMapping("/{id}")
-    public OrderDto getOrderById(User user, @PathVariable UUID id) {
+    public OrderDTO getOrderById(User user, @PathVariable UUID id) {
         return this.queryHandler.handle(new GetOrderById(user, id));
     }
 
@@ -43,7 +43,7 @@ public class OrderController {
 
     @Transactional
     @PostMapping
-    public OrderDto placeOrder(User user, @RequestBody PlaceOrderRequest body) {
+    public OrderDTO placeOrder(User user, @RequestBody PlaceOrderRequest body) {
         return this.commandHandler.handle(new PlaceOrder(user, body.dishes));
     }
 }

@@ -7,8 +7,8 @@ import nl.hu.inno.delivery.core.application.command.PostDeliveryReview;
 import nl.hu.inno.delivery.core.application.query.GetDeliveries;
 import nl.hu.inno.delivery.core.application.query.GetDeliveryById;
 import nl.hu.inno.delivery.core.application.query.GetReviewsForDelivery;
-import nl.hu.inno.delivery.infrastructure.dto.DeliveryDto;
-import nl.hu.inno.delivery.infrastructure.dto.DeliveryReviewDto;
+import nl.hu.inno.delivery.infrastructure.dto.DeliveryDTO;
+import nl.hu.inno.delivery.infrastructure.dto.DeliveryReviewDTO;
 import nl.hu.inno.delivery.infrastructure.web.request.PostReviewRequest;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,22 +27,22 @@ public class DeliveryController {
     }
 
     @GetMapping
-    public List<DeliveryDto> getDeliveries(User user) {
+    public List<DeliveryDTO> getDeliveries(User user) {
         return this.deliveryQueryHandler.handle(new GetDeliveries(user));
     }
 
     @GetMapping("/{id}")
-    public DeliveryDto getDeliveryById(User user, @PathVariable("id") UUID id) {
+    public DeliveryDTO getDeliveryById(User user, @PathVariable("id") UUID id) {
         return this.deliveryQueryHandler.handle(new GetDeliveryById(user, id));
     }
 
     @GetMapping("/{id}/reviews")
-    public List<DeliveryReviewDto> getReviewsForDelivery(@PathVariable("id") UUID id) {
+    public List<DeliveryReviewDTO> getReviewsForDelivery(@PathVariable("id") UUID id) {
         return this.deliveryQueryHandler.handle(new GetReviewsForDelivery(id));
     }
 
     @PostMapping("/{id}/reviews")
-    public DeliveryReviewDto postDeliveryReview(User user, @PathVariable("id") UUID id, @RequestBody PostReviewRequest body) {
+    public DeliveryReviewDTO postDeliveryReview(User user, @PathVariable("id") UUID id, @RequestBody PostReviewRequest body) {
         return this.deliveryCommandHandler.handle(new PostDeliveryReview(id, body.rating, body.description, user));
     }
 }

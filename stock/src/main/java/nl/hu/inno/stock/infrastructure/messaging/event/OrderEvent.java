@@ -1,6 +1,6 @@
 package nl.hu.inno.stock.infrastructure.messaging.event;
 
-import nl.hu.inno.stock.infrastructure.dto.OrderedDishDto;
+import nl.hu.inno.stock.infrastructure.dto.OrderedDishDTO;
 
 import java.time.Instant;
 import java.util.List;
@@ -12,5 +12,5 @@ public class OrderEvent {
     public Instant eventDate;
 
     public UUID order;
-    public List<OrderedDishDto> orderedDishes;
+    public List<OrderedDishDTO> orderedDishes;
 }

@@ -4,7 +4,7 @@ import nl.hu.inno.orders.core.application.query.GetReport;
 import nl.hu.inno.orders.core.data.storage.OrderRepository;
 import nl.hu.inno.orders.core.domain.Order;
 import nl.hu.inno.orders.core.domain.exception.InvalidIntervalException;
-import nl.hu.inno.orders.infrastructure.dto.ReportDto;
+import nl.hu.inno.orders.infrastructure.dto.ReportDTO;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -20,14 +20,14 @@ public class ReportQueryHandler {
         this.orderRepository = orderRepository;
     }
 
-    public List<ReportDto> handle(GetReport query) {
+    public List<ReportDTO> handle(GetReport query) {
         return this.orderRepository
                 .findAll()
                 .stream()
                 .collect(Collectors.groupingBy(order -> this.getIntervalGrouping(order, query.interval())))
                 .entrySet()
                 .stream()
-                .map(entrySet -> ReportDto.toDto(entrySet.getKey(), entrySet.getValue().size()))
+                .map(entrySet -> ReportDTO.toDTO(entrySet.getKey(), entrySet.getValue().size()))
                 .toList();
     }
 

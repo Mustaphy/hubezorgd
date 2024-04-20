@@ -16,7 +16,7 @@ import nl.hu.inno.delivery.core.domain.exception.DeliveryNotFoundException;
 import nl.hu.inno.delivery.core.domain.exception.NoAvailableRidersException;
 import nl.hu.inno.delivery.core.domain.exception.DeliveryNotCompletedException;
 import nl.hu.inno.delivery.core.domain.info.OrderInfo;
-import nl.hu.inno.delivery.infrastructure.dto.DeliveryReviewDto;
+import nl.hu.inno.delivery.infrastructure.dto.DeliveryReviewDTO;
 import nl.hu.inno.delivery.infrastructure.gateway.HttpOrdersGateway;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.stereotype.Service;
@@ -81,7 +81,7 @@ public class DeliveryCommandHandler {
         }
     }
 
-    public DeliveryReviewDto handle(PostDeliveryReview command) {
+    public DeliveryReviewDTO handle(PostDeliveryReview command) {
         Delivery delivery = this.deliveryRepository
                 .findById(command.id())
                 .orElseThrow(() -> new DeliveryNotFoundException(String.format("Delivery with id '%s' could not be found", command.id())));
@@ -90,7 +90,7 @@ public class DeliveryCommandHandler {
             throw new DeliveryNotCompletedException("You can't review a delivery that hasn't been delivered");
         }
 
-        return DeliveryReviewDto.toDto(this.deliveryReviewRepository.save(new DeliveryReview(delivery, ReviewRating.fromInt(command.rating()), command.description(), command.user())));
+        return DeliveryReviewDTO.toDTO(this.deliveryReviewRepository.save(new DeliveryReview(delivery, ReviewRating.fromInt(command.rating()), command.description(), command.user())));
     }
 
     private void publishEventsAndSave(Delivery delivery) {

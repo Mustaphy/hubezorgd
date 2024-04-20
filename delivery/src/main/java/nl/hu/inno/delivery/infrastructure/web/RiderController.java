@@ -5,7 +5,7 @@ import nl.hu.inno.delivery.core.application.RiderQueryHandler;
 import nl.hu.inno.delivery.core.application.command.CreateRider;
 import nl.hu.inno.delivery.core.application.query.GetRiders;
 import nl.hu.inno.delivery.core.application.query.GetRiderById;
-import nl.hu.inno.delivery.infrastructure.dto.RiderDto;
+import nl.hu.inno.delivery.infrastructure.dto.RiderDTO;
 import nl.hu.inno.delivery.infrastructure.web.request.CreateRiderRequest;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,17 +24,17 @@ public class RiderController {
     }
 
     @GetMapping
-    public List<RiderDto> handle() {
+    public List<RiderDTO> handle() {
         return this.riderQueryHandler.handle(new GetRiders());
     }
 
     @GetMapping("/{id}")
-    public RiderDto handle(@PathVariable("id") UUID id) {
+    public RiderDTO handle(@PathVariable("id") UUID id) {
         return this.riderQueryHandler.handle(new GetRiderById(id));
     }
 
     @PostMapping
-    public RiderDto handle(@RequestBody CreateRiderRequest body) {
+    public RiderDTO handle(@RequestBody CreateRiderRequest body) {
         return this.riderCommandHandler.handle(new CreateRider(body.name));
     }
 }

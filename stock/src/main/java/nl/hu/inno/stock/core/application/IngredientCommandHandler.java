@@ -6,8 +6,7 @@ import nl.hu.inno.stock.core.domain.Ingredient;
 import nl.hu.inno.stock.core.application.command.CreateIngredient;
 import nl.hu.inno.stock.core.data.IngredientEventPublisher;
 import nl.hu.inno.stock.core.domain.event.IngredientEvent;
-import nl.hu.inno.stock.infrastructure.dto.IngredientDto;
-import org.springframework.beans.factory.annotation.Autowired;
+import nl.hu.inno.stock.infrastructure.dto.IngredientDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,12 +22,12 @@ public class IngredientCommandHandler {
         this.eventPublisher = eventPublisher;
     }
 
-    public IngredientDto handle(CreateIngredient command) {
+    public IngredientDTO handle(CreateIngredient command) {
         Ingredient ingredient = Ingredient.create(command.name(), command.vegetarian(), command.nrInStock());
 
         this.publishEventsAndSave(ingredient);
 
-        return IngredientDto.toDto(ingredient);
+        return IngredientDTO.toDTO(ingredient);
     }
 
     private void publishEventsAndSave(Ingredient ingredient) {

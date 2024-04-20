@@ -7,8 +7,8 @@ import nl.hu.inno.delivery.core.data.storage.DeliveryRepository;
 import nl.hu.inno.delivery.core.data.storage.DeliveryReviewRepository;
 import nl.hu.inno.delivery.core.domain.Delivery;
 import nl.hu.inno.delivery.core.domain.exception.DeliveryNotFoundException;
-import nl.hu.inno.delivery.infrastructure.dto.DeliveryDto;
-import nl.hu.inno.delivery.infrastructure.dto.DeliveryReviewDto;
+import nl.hu.inno.delivery.infrastructure.dto.DeliveryDTO;
+import nl.hu.inno.delivery.infrastructure.dto.DeliveryReviewDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,21 +23,21 @@ public class DeliveryQueryHandler {
         this.deliveryReviewRepository = deliveryReviewRepository;
     }
 
-    public List<DeliveryDto> handle(GetDeliveries query) {
+    public List<DeliveryDTO> handle(GetDeliveries query) {
         return this.deliveryRepository
                 .findDeliveriesByOrder_Username(query.user().getUsername())
                 .stream()
-                .map(DeliveryDto::toDto)
+                .map(DeliveryDTO::toDTO)
                 .toList();
     }
 
-    public DeliveryDto handle(GetDeliveryById query) {
-        return DeliveryDto.toDto(this.deliveryRepository
+    public DeliveryDTO handle(GetDeliveryById query) {
+        return DeliveryDTO.toDTO(this.deliveryRepository
                 .findDeliveryByDeliveryIdAndOrder_Username(query.id(), query.user().getUsername())
                 .orElseThrow(() -> new DeliveryNotFoundException(String.format("Delivery with id '%s' could not be found.", query.id()))));
     }
 
-    public List<DeliveryReviewDto> handle(GetReviewsForDelivery query) {
+    public List<DeliveryReviewDTO> handle(GetReviewsForDelivery query) {
         Delivery delivery = this.deliveryRepository
                 .findById(query.id())
                 .orElseThrow(() -> new DeliveryNotFoundException(String.format("Delivery with id '%s' could not be found.", query.id())));
@@ -45,7 +45,7 @@ public class DeliveryQueryHandler {
         return this.deliveryReviewRepository
                 .findByDelivery(delivery)
                 .stream()
-                .map(DeliveryReviewDto::toDto)
+                .map(DeliveryReviewDTO::toDTO)
                 .toList();
     }
 }

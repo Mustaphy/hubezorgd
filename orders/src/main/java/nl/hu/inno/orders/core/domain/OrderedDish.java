@@ -44,8 +44,4 @@ public class OrderedDish {
     public UUID getDishId() {
         return this.id.dish.id();
     }
-
-    public DishInfo getDish() {
-        return this.id.dish;
-    }
 }
