@@ -9,7 +9,7 @@ services:
       - "5672:5672"
       - "15672:15672"
     environment:
-      RABBITMQ_NODENAME: thuusbezorgd-rabbitmq-node
+      RABBITMQ_NODENAME: hubezorgd-rabbitmq-node
     volumes:
       - ./development/rabbitmq/data/:/var/lib/rabbitmq/
 
