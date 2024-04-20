@@ -2,7 +2,7 @@ package nl.hu.inno.delivery.core.application;
 
 import nl.hu.inno.delivery.core.application.query.GetDeliveries;
 import nl.hu.inno.delivery.core.application.query.GetDeliveryById;
-import nl.hu.inno.delivery.core.application.query.GetDeliveryReviewsForDelivery;
+import nl.hu.inno.delivery.core.application.query.GetReviewsForDelivery;
 import nl.hu.inno.delivery.core.data.storage.DeliveryRepository;
 import nl.hu.inno.delivery.core.data.storage.DeliveryReviewRepository;
 import nl.hu.inno.delivery.core.domain.Delivery;
@@ -33,11 +33,11 @@ public class DeliveryQueryHandler {
 
     public DeliveryDto handle(GetDeliveryById query) {
         return DeliveryDto.toDto(this.deliveryRepository
-                .findDeliveryByIdAndOrder_Username(query.id(), query.user().getUsername())
+                .findDeliveryByDeliveryIdAndOrder_Username(query.id(), query.user().getUsername())
                 .orElseThrow(() -> new DeliveryNotFoundException(String.format("Delivery with id '%s' could not be found.", query.id()))));
     }
 
-    public List<DeliveryReviewDto> handle(GetDeliveryReviewsForDelivery query) {
+    public List<DeliveryReviewDto> handle(GetReviewsForDelivery query) {
         Delivery delivery = this.deliveryRepository
                 .findById(query.id())
                 .orElseThrow(() -> new DeliveryNotFoundException(String.format("Delivery with id '%s' could not be found.", query.id())));

@@ -4,6 +4,7 @@ import nl.hu.inno.stock.core.application.DishCommandHandler;
 import nl.hu.inno.stock.core.application.command.PrepareDishes;
 import nl.hu.inno.stock.infrastructure.messaging.event.OrderEvent;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component

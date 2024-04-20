@@ -1,7 +1,11 @@
 package nl.hu.inno.common.security;
 
+import jakarta.transaction.Transactional;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpStatus;
+import org.springframework.lang.NonNull;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -12,6 +16,7 @@ import java.util.Optional;
 
 public class UserResolver implements HandlerMethodArgumentResolver {
     private final UserRepository users;
+
     public UserResolver(UserRepository users) {
         this.users = users;
     }
@@ -22,7 +27,7 @@ public class UserResolver implements HandlerMethodArgumentResolver {
     }
 
     @Override
-    public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) {
+    public Object resolveArgument(@NonNull MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) {
         String username = webRequest.getHeader("Authentication-Hack");
 
         if (username == null) {

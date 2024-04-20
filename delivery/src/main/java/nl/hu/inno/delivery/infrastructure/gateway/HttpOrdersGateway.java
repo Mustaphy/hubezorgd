@@ -19,15 +19,15 @@ public class HttpOrdersGateway {
     }
 
     public boolean isDelivered(UUID id) {
-        URI uri = URI.create(String.format("%s/orders/%s/check-delivered", this.rootPath, id));
+        URI uri = URI.create(String.format("%s/orders/%s/is-delivered", this.rootPath, id));
 
         Boolean result = null;
         try {
             result = this.client.getForObject(uri, Boolean.class);
         } catch (RestClientException e) {
-            // Other exceptions are caught in the exception handler
-            if (e.getCause() instanceof ConnectException)
+            if (e.getCause() instanceof ConnectException) {
                 throw new OrdersServiceOfflineException("The order service is currently offline");
+            }
         }
 
         return Boolean.TRUE.equals(result);

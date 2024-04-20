@@ -1,9 +1,10 @@
 package nl.hu.inno.stock.core.application;
 
+import jakarta.transaction.Transactional;
 import nl.hu.inno.stock.core.application.command.CreateDish;
 import nl.hu.inno.stock.core.application.command.PostDishReview;
 import nl.hu.inno.stock.core.application.command.PrepareDishes;
-import nl.hu.inno.stock.core.application.query.CheckDishAvailability;
+import nl.hu.inno.stock.core.application.query.IsAvailable;
 import nl.hu.inno.stock.core.data.DishEventPublisher;
 import nl.hu.inno.stock.core.data.storage.DishRepository;
 import nl.hu.inno.stock.core.data.storage.DishReviewRepository;
@@ -24,6 +25,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
+@Transactional
 public class DishCommandHandler {
     private final DishQueryHandler dishQueryHandler;
     private final DishRepository dishRepository;
@@ -56,7 +58,7 @@ public class DishCommandHandler {
     }
 
     public void handle(PrepareDishes command) {
-        if (!dishQueryHandler.handle(new CheckDishAvailability(command.orderedDishes()))) {
+        if (!dishQueryHandler.handle(new IsAvailable(command.orderedDishes()))) {
             throw new OutOfStockException("At least one of the dishes is out of stock.");
         }
 
@@ -72,7 +74,7 @@ public class DishCommandHandler {
             this.publishEventsAndSave(dish);
         });
 
-        this.publishEvent(new DishesPreparedEvent(command.order()));
+        this.eventPublisher.publish(new DishesPreparedEvent(command.order()));
     }
 
     public DishReviewDto handle(PostDishReview command) {
@@ -89,10 +91,6 @@ public class DishCommandHandler {
         dish.clearEvents();
 
         this.dishRepository.save(dish);
-    }
-
-    private void publishEvent(DishEvent event) {
-        this.eventPublisher.publish(event);
     }
 }
 

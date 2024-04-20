@@ -1,8 +1,11 @@
 package nl.hu.inno.stock.core.domain.event;
 
+import jakarta.persistence.Embeddable;
+
 import java.time.Instant;
 import java.util.UUID;
 
+@Embeddable
 public abstract class IngredientEvent {
     private final UUID eventId = UUID.randomUUID();
     private final Instant eventDate = Instant.now();

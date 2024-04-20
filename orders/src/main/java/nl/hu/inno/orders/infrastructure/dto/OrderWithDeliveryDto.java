@@ -10,7 +10,7 @@ public class OrderWithDeliveryDto extends OrderDto {
                 .stream()
                 .map(OrderedDishDto::toDto)
                 .toList());
-        this.deliveryLink = String.format("http://localhost:8082/delivery/%s", order.getDelivery().id());
+        this.deliveryLink = String.format("http://localhost:8082/delivery/%s", order.getDelivery().deliveryId());
     }
 
     public String getDeliveryLink() {

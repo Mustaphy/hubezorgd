@@ -10,15 +10,14 @@ import java.util.List;
 
 @Component
 public class UserConfig implements WebMvcConfigurer {
-    private UserRepository users;
+    private final UserRepository userRepository;
 
-    public UserConfig(UserRepository users) {
-        this.users = users;
+    public UserConfig(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Override
-    public void addArgumentResolvers(
-            List<HandlerMethodArgumentResolver> resolvers) {
-        resolvers.add(new UserResolver(users));
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
+        resolvers.add(new UserResolver(userRepository));
     }
 }

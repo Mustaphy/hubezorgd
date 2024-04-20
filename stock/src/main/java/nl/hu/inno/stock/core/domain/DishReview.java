@@ -1,21 +1,24 @@
 package nl.hu.inno.stock.core.domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import nl.hu.inno.common.security.User;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import java.util.UUID;
 
-@Document
+@Entity
 public class DishReview {
     @Id
     private UUID id;
-    @DocumentReference
+    @ManyToOne
     private Dish dish;
     private ReviewRating rating;
     private String description;
+    @ManyToOne
     private User user;
+
+    protected DishReview() { }
 
     public DishReview(Dish dish, ReviewRating rating, String description, User user) {
         this.id = UUID.randomUUID();

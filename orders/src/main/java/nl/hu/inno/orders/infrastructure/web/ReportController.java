@@ -25,8 +25,8 @@ public class ReportController {
     }
 
     // POSSIBLE QUERY PARAMETERS
-    // Interval: minute, hour, day, week, month or year (default: day)
-    @GetMapping("")
+    // interval: minute, hour, day, week, month, year (default: day)
+    @GetMapping
     public List<ReportDto> getReport(@RequestParam Optional<String> interval) {
         return this.reportQueryHandler.handle(new GetReport(interval.orElse("day")));
     }

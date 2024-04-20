@@ -21,7 +21,7 @@ public class HttpStockGateway {
     public boolean checkStock(List<OrderedDish> orderedDishes) {
         StringBuilder queryParameters = new StringBuilder();
         orderedDishes.forEach(dish -> queryParameters.append(String.format("orderedDishes=%s&", dish.getDishId())));
-        URI uri = URI.create(this.rootPath + "/stock/dishes/check-availability?" + queryParameters);
+        URI uri = URI.create(this.rootPath + "/stock/dishes/is-available?" + queryParameters);
 
         Boolean result = null;
         try {

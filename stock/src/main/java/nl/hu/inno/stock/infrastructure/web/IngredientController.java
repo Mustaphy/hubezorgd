@@ -8,6 +8,7 @@ import nl.hu.inno.stock.core.application.query.GetIngredients;
 import nl.hu.inno.stock.core.domain.Ingredient;
 import nl.hu.inno.stock.infrastructure.dto.IngredientDto;
 import nl.hu.inno.stock.infrastructure.web.request.CreateIngredientRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,12 +25,12 @@ public class IngredientController {
         this.queryHandler = queryHandler;
     }
 
-    @PostMapping("")
+    @PostMapping
     public IngredientDto createIngredient(@RequestBody CreateIngredientRequest body) {
         return this.commandHandler.handle(new CreateIngredient(body.name, body.vegetarian, body.nrInStock));
     }
 
-    @GetMapping("")
+    @GetMapping
     public List<IngredientDto> getIngredients() {
         return this.queryHandler.handle(new GetIngredients());
     }

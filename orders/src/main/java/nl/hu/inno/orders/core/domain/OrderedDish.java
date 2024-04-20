@@ -1,24 +1,26 @@
 package nl.hu.inno.orders.core.domain;
 
+import jakarta.persistence.*;
 import nl.hu.inno.orders.core.domain.info.DishInfo;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import java.io.Serializable;
 import java.util.UUID;
 
-@Document
+@Entity
 public class OrderedDish {
+    @Embeddable
     public static class OrderedDishId implements Serializable {
+        @Embedded
         private DishInfo dish;
-        @DocumentReference
+        @ManyToOne
         private Order order;
     }
 
+    @EmbeddedId
     private OrderedDishId id;
     private int nr;
 
-    private OrderedDish() { }
+    protected OrderedDish() { }
 
     private OrderedDish(Order order, DishInfo dish, int nr) {
         this.id = new OrderedDishId();

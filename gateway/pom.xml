@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>nl.hu.inno</groupId>
-        <artifactId>thuusbezorgd-parent</artifactId>
+        <artifactId>thuusbezorgd</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
@@ -43,5 +43,4 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
 </project>

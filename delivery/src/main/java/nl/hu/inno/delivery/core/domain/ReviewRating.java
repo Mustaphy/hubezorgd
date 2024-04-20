@@ -19,14 +19,4 @@ public enum ReviewRating {
             default -> throw new InvalidRatingException(String.format("Rating of value '%s' is invalid. Rating must be between 1 and 5.", rating));
         };
     }
-
-    public int toInt() {
-        return switch (this) {
-            case HORRIBLE -> 1;
-            case POOR -> 2;
-            case AVERAGE -> 3;
-            case GOOD -> 4;
-            case EXCELLENT -> 5;
-        };
-    }
 }

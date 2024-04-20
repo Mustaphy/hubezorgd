@@ -1,26 +1,25 @@
 package nl.hu.inno.delivery.core.domain;
 
+import jakarta.persistence.*;
 import nl.hu.inno.delivery.core.domain.event.DeliveryEvent;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@Document
+@Entity
 public class Rider {
     @Id
     private UUID id;
     private String name;
-    @DocumentReference(lazy = true)
+    @OneToMany
     private List<Delivery> deliveries = new ArrayList<>();
+    @ElementCollection
     @Transient
     private List<DeliveryEvent> events = new ArrayList<>();
 
-    public Rider() { }
+    protected Rider() { }
 
     private Rider(String name) {
         this.id = UUID.randomUUID();

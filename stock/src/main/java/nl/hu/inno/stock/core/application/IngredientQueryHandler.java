@@ -1,15 +1,18 @@
 package nl.hu.inno.stock.core.application;
 
+import jakarta.transaction.Transactional;
 import nl.hu.inno.stock.core.data.storage.IngredientRepository;
 import nl.hu.inno.stock.core.application.query.GetIngredientById;
 import nl.hu.inno.stock.core.application.query.GetIngredients;
 import nl.hu.inno.stock.core.domain.exception.IngredientNotFoundException;
 import nl.hu.inno.stock.infrastructure.dto.IngredientDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class IngredientQueryHandler {
     private final IngredientRepository repository;
 

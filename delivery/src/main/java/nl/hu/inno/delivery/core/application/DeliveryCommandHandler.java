@@ -63,7 +63,7 @@ public class DeliveryCommandHandler {
 
         // Schedule a task for 2 seconds after estimated delivery to complete delivery
         this.taskScheduler.schedule(
-                new CompleteDelivery(this, delivery.getId()),
+                new CompleteDelivery(this, delivery.getDeliveryId()),
                 Instant.from(delivery
                         .getEstimatedDelivery()
                         .plusSeconds(3)

@@ -1,22 +1,40 @@
 version: "3.9"
+
 services:
   rabbitmq:
     restart: always
     image: rabbitmq:3-management
+    container_name: rabbitmq
     ports:
       - "5672:5672"
       - "15672:15672"
     environment:
       RABBITMQ_NODENAME: thuusbezorgd-rabbitmq-node
-  mongodb:
-    image: mongo
-    restart: always
+    volumes:
+      - ./development/rabbitmq/data/:/var/lib/rabbitmq/
+
+  postgres:
+    build: development/database
+    container_name: postgres
     ports:
-      - "27017:27017"
-  mongo-express:
-    image: mongo-express
-    restart: always
-    ports:
-      - 8092:8081
+      - "15432:5432"
     environment:
-      ME_CONFIG_MONGODB_URL: mongodb://mongodb:27017/
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - DB_APP_USER=postgres
+      - DB_APP_PASS=postgres
+      - STOCK_DATABASE_NAME=stock
+      - ORDERS_DATABASE_NAME=orders
+      - DELIVERY_DATABASE_NAME=delivery
+    volumes:
+      - "./data:/var/data/database"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: always
+    ports:
+      - "8091:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: student@hu.nl
+      PGADMIN_DEFAULT_PASSWORD: 1q2w3e!

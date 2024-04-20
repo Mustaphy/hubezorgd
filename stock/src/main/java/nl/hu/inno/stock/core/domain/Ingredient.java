@@ -1,26 +1,30 @@
 package nl.hu.inno.stock.core.domain;
 
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import nl.hu.inno.stock.core.domain.event.IngredientCreatedEvent;
 import nl.hu.inno.stock.core.domain.event.IngredientEvent;
 import nl.hu.inno.stock.core.domain.exception.OutOfStockException;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-@Document
+@Entity
 public class Ingredient {
     @Id
     private UUID id;
     private String name;
     private boolean vegetarian;
     private int nrInStock;
+    @ElementCollection
     @Transient
     private List<IngredientEvent> events = new ArrayList<>();
+
+    protected Ingredient() {}
 
     private Ingredient(String name, boolean vegetarian, int nrInStock) {
         this.id = UUID.randomUUID();

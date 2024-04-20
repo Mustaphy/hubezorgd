@@ -1,16 +1,19 @@
 package nl.hu.inno.stock.core.application;
 
+import jakarta.transaction.Transactional;
 import nl.hu.inno.stock.core.data.storage.IngredientRepository;
 import nl.hu.inno.stock.core.domain.Ingredient;
 import nl.hu.inno.stock.core.application.command.CreateIngredient;
 import nl.hu.inno.stock.core.data.IngredientEventPublisher;
 import nl.hu.inno.stock.core.domain.event.IngredientEvent;
 import nl.hu.inno.stock.infrastructure.dto.IngredientDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class IngredientCommandHandler {
     private final IngredientRepository repository;
     private final IngredientEventPublisher eventPublisher;

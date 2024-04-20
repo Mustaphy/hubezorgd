@@ -31,13 +31,13 @@ public class OrderQueryHandler {
     public OrderDto handle(GetOrderById query) {
         return DeliveryBasedOrderDtoFactory.create(this.orderRepository
                 .findByIdAndUser(query.id(), query.user())
-                .orElseThrow(() -> new OrderNotFoundException(String.format("Order with id '%s' could not be found.", query.id()))));
+                .orElseThrow(() -> new OrderNotFoundException(String.format("Order with deliveryId '%s' could not be found.", query.id()))));
     }
 
     public boolean handle(IsDelivered query) {
         return this.orderRepository
                 .findById(query.id())
-                .orElseThrow(() -> new OrderNotFoundException(String.format("Order with id '%s' could not be found.", query.id())))
+                .orElseThrow(() -> new OrderNotFoundException(String.format("Order with deliveryId '%s' could not be found.", query.id())))
                 .getStatus()
                 .equals(OrderStatus.DELIVERED);
     }

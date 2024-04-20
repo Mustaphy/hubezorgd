@@ -1,9 +1,11 @@
 package nl.hu.inno.common.security;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
-@Document
+@Entity
+@Table(name = "users")
 public class User {
     @Id
     private String username;
@@ -18,9 +20,5 @@ public class User {
 
     public String getUsername() {
         return username;
-    }
-
-    public String getPassword() {
-        return password;
     }
 }

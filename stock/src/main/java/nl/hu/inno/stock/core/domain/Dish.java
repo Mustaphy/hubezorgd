@@ -1,24 +1,25 @@
 package nl.hu.inno.stock.core.domain;
 
+import jakarta.persistence.*;
 import nl.hu.inno.stock.core.domain.event.DishCreatedEvent;
 import nl.hu.inno.stock.core.domain.event.DishEvent;
 import nl.hu.inno.stock.core.domain.exception.NoIngredientsException;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import java.util.*;
 
-@Document
+@Entity
 public class Dish {
     @Id
     private UUID id;
     private String name;
-    @DocumentReference(lazy = true)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Ingredient> ingredients;
+    @ElementCollection
     @Transient
     private List<DishEvent> events = new ArrayList<>();
+
+    protected Dish() { }
 
     private Dish(String name, List<Ingredient> ingredients) {
         this.id = UUID.randomUUID();
@@ -55,9 +56,7 @@ public class Dish {
     }
 
     public void prepare(int nr) {
-        for (Ingredient ingredient : this.ingredients) {
-            ingredient.take(nr);
-        }
+        this.ingredients.forEach(ingredient -> ingredient.take(nr));
     }
 
     public List<DishEvent> listEvents() {

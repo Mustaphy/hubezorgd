@@ -1,5 +1,6 @@
 package nl.hu.inno.stock.core.application;
 
+import jakarta.transaction.Transactional;
 import nl.hu.inno.stock.core.application.query.*;
 import nl.hu.inno.stock.core.data.storage.DishRepository;
 import nl.hu.inno.stock.core.data.storage.DishReviewRepository;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@Transactional
 public class DishQueryHandler {
     private final DishRepository dishRepository;
     private final DishReviewRepository dishReviewRepository;
@@ -36,7 +38,7 @@ public class DishQueryHandler {
                 .orElseThrow(() -> new DishNotFoundException(String.format("Dish with id '%s' could not be found.", query.id()))));
     }
 
-    public boolean handle(CheckDishAvailability query) {
+    public boolean handle(IsAvailable query) {
         return query
                 .dishes()
                 .stream()

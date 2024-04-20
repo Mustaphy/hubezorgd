@@ -4,33 +4,40 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import jakarta.persistence.*;
 import nl.hu.inno.orders.core.domain.event.OrderReadyForDeliveryEvent;
 import nl.hu.inno.orders.core.domain.info.DeliveryInfo;
 import nl.hu.inno.orders.core.domain.info.DishInfo;
 import nl.hu.inno.orders.core.domain.event.OrderEvent;
 import nl.hu.inno.orders.core.domain.event.OrderPlacedEvent;
 import nl.hu.inno.common.security.User;
-import org.springframework.data.annotation.Id;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.springframework.data.annotation.Transient;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
+@Entity(name = "Orders")
 public class Order {
     @Id
     private UUID id;
+    @ManyToOne
     private User user;
     private LocalDateTime orderDate;
+    @Enumerated(EnumType.STRING)
     private OrderStatus status;
+    @OneToMany
+    @Cascade(CascadeType.PERSIST)
     private List<OrderedDish> orderedDishes = new ArrayList<>();
+    @Embedded
     private DeliveryInfo delivery;
+    @ElementCollection
     @Transient
     private List<OrderEvent> events = new ArrayList<>();
 
-    private Order() { }
+    protected Order() { }
 
-    private Order(User u, LocalDateTime orderDate) {
+    private Order(User user, LocalDateTime orderDate) {
         this.id = UUID.randomUUID();
-        this.user = u;
+        this.user = user;
         this.orderDate = orderDate;
         this.status = OrderStatus.RECEIVED;
     }

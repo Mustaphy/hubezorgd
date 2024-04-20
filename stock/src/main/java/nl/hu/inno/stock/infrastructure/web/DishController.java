@@ -5,10 +5,9 @@ import nl.hu.inno.stock.core.application.DishCommandHandler;
 import nl.hu.inno.stock.core.application.DishQueryHandler;
 import nl.hu.inno.stock.core.application.command.CreateDish;
 import nl.hu.inno.stock.core.application.command.PostDishReview;
-import nl.hu.inno.stock.core.application.query.CheckDishAvailability;
+import nl.hu.inno.stock.core.application.query.IsAvailable;
 import nl.hu.inno.stock.core.application.query.GetDishes;
 import nl.hu.inno.stock.core.application.query.GetReviewsForDish;
-import nl.hu.inno.stock.core.domain.Dish;
 import nl.hu.inno.stock.infrastructure.dto.DishDto;
 import nl.hu.inno.stock.infrastructure.dto.DishReviewDto;
 import nl.hu.inno.stock.infrastructure.dto.OrderedDishDto;
@@ -54,12 +53,12 @@ public class DishController {
     }
 
     @PostMapping("/{id}/reviews")
-    public DishReviewDto postReview(User user, @PathVariable("id") UUID id, @RequestBody PostReviewRequest body) {
+    public DishReviewDto postDishReview(User user, @PathVariable("id") UUID id, @RequestBody PostReviewRequest body) {
         return this.commandHandler.handle(new PostDishReview(id, body.rating, body.description, user));
     }
 
-    @GetMapping("/check-availability")
-    public boolean checkAvailability(@RequestParam MultiValueMap<String, String> parameterMap) {
+    @GetMapping("/is-available")
+    public boolean isAvailable(@RequestParam MultiValueMap<String, String> parameterMap) {
         List<OrderedDishDto> orderedDishes = parameterMap.get("orderedDishes")
                 .stream()
                 .collect(Collectors.groupingBy(UUID::fromString, Collectors.counting()))
@@ -68,6 +67,6 @@ public class DishController {
                 .map(dish -> new OrderedDishDto(dish.getKey(), dish.getValue().intValue()))
                 .toList();
 
-        return this.queryHandler.handle(new CheckDishAvailability(orderedDishes));
+        return this.queryHandler.handle(new IsAvailable(orderedDishes));
     }
 }

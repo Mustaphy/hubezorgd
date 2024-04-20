@@ -6,7 +6,7 @@ import nl.hu.inno.delivery.core.application.DeliveryQueryHandler;
 import nl.hu.inno.delivery.core.application.command.PostDeliveryReview;
 import nl.hu.inno.delivery.core.application.query.GetDeliveries;
 import nl.hu.inno.delivery.core.application.query.GetDeliveryById;
-import nl.hu.inno.delivery.core.application.query.GetDeliveryReviewsForDelivery;
+import nl.hu.inno.delivery.core.application.query.GetReviewsForDelivery;
 import nl.hu.inno.delivery.infrastructure.dto.DeliveryDto;
 import nl.hu.inno.delivery.infrastructure.dto.DeliveryReviewDto;
 import nl.hu.inno.delivery.infrastructure.web.request.PostReviewRequest;
@@ -38,11 +38,11 @@ public class DeliveryController {
 
     @GetMapping("/{id}/reviews")
     public List<DeliveryReviewDto> getReviewsForDelivery(@PathVariable("id") UUID id) {
-        return this.deliveryQueryHandler.handle(new GetDeliveryReviewsForDelivery(id));
+        return this.deliveryQueryHandler.handle(new GetReviewsForDelivery(id));
     }
 
     @PostMapping("/{id}/reviews")
-    public DeliveryReviewDto postReview(User user, @PathVariable("id") UUID id, @RequestBody PostReviewRequest body) {
+    public DeliveryReviewDto postDeliveryReview(User user, @PathVariable("id") UUID id, @RequestBody PostReviewRequest body) {
         return this.deliveryCommandHandler.handle(new PostDeliveryReview(id, body.rating, body.description, user));
     }
 }
